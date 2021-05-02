@@ -1,0 +1,22 @@
+.side-bar {
+    margin-top: 70px;
+    height: 100%;
+    width: 90%;
+    max-width: 300px;
+    position: absolute;
+    border-top-right-radius: 40px;
+    background-color:#ececec;
+    transition: 0.3s ease;
+}
+
+.toggle-menu {
+    height: 50px;
+    width: 10px;
+    position: absolute;
+    outline: none;
+    z-index: 1;
+}
+
+.content {
+    margin: 20px;
+}
