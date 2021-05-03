@@ -44,7 +44,7 @@ const MenuList = styled.li`
     transition: color .1s;
 `;
 
-const Sidebar = ({ width, height, children }) => {
+const Sidebar = ({ width, height, login ,children }) => {
   const [xPosition, setX] = React.useState(-width);
 
   const toggleMenu = () => {
@@ -73,13 +73,16 @@ const Sidebar = ({ width, height, children }) => {
       >
         <Content>
           <UserInfo>
-            환영합니다 관리자님!
+            { login ? "환영합니다 관리자님!" : "로그인해주세요" }
           </UserInfo>
-          <Menu>
+          { login ? 
+          <Menu>   
           <Link to="/login"><MenuList>Login</MenuList></Link>
           <Link to="/"><MenuList>Ranking</MenuList></Link>
           <Link to="/teamselect"><MenuList>Team</MenuList></Link>
-          </Menu>
+          </Menu> 
+          : null
+          }
           </Content>
       </Navi>
     </React.Fragment>
