@@ -1,7 +1,7 @@
 import './Sidebar.css';
 import React from "react";
-import BarIcon from './BarIcon'
-import { HashRouter, Link } from 'react-router-dom';
+import Header from './Header'
+import { Link } from 'react-router-dom';
 
 const Sidebar = ({ width, height, children }) => {
   const [xPosition, setX] = React.useState(-width);
@@ -24,7 +24,7 @@ const Sidebar = ({ width, height, children }) => {
       <div className="page">
         <div className="toggle-menu"
         onClick={() => toggleMenu()}>
-        <BarIcon  />
+        <Header  />
         </div>
       <div
         className="side-bar"

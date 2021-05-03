@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Sidebar from '../components/Sidebar'
-import BarIcon from "../components/BarIcon";
+import BarIcon from "../components/Header";
 
 
 

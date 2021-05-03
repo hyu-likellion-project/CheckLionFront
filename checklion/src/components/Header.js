@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 
-function BarIcon() {
+function Header() {
   return (
     <section>
       <div className="fa-2x">
@@ -12,4 +12,4 @@ function BarIcon() {
   );
 }
 
-export default BarIcon;
+export default Header;
