@@ -1,7 +1,48 @@
-import './Sidebar.css';
 import React from "react";
 import Header from './Header'
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+const Content = styled.div`
+    width: 90%;
+    max-width: 300px;
+    margin-top: 70px;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    border-top-right-radius: 40px;
+    background-color:#ececec;
+    font-weight: 600;
+    letter-spacing: .03em;
+`;
+
+const UserInfo = styled.div`
+     margin-top : 60px;
+     padding-left : 30px;
+     margin-bottom : 60px;
+`;
+
+const Navi  = styled.div`
+    transition: 0.3s ease;
+    width: 100%;
+    position: fixed;
+    height: 100vh;
+    width: width,
+    minHeight: height
+`;
+
+const Menu = styled.ul`
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+`;
+
+const MenuList = styled.li`
+    padding: 10px 5px;
+    display: block;
+    text-transform: uppercase;
+    transition: color .1s;
+`;
 
 const Sidebar = ({ width, height, children }) => {
   const [xPosition, setX] = React.useState(-width);
@@ -21,31 +62,26 @@ const Sidebar = ({ width, height, children }) => {
 
   return (
     <React.Fragment>
-      <div className="page">
         <div className="toggle-menu"
         onClick={() => toggleMenu()}>
         <Header  />
         </div>
-      <div
-        className="side-bar"
+      <Navi
         style={{
           transform: `translatex(${xPosition}px)`,
-          width: width,
-          minHeight: height
         }}
       >
-        <div className="content">
-          <div className="userInfo">
+        <Content>
+          <UserInfo>
             환영합니다 관리자님!
-          </div>
-          <ul>
-          <Link to="/login"><li>Login</li></Link>
-          <Link to="/"><li>Ranking</li></Link>
-          <Link to="/teamselect"><li>Team</li></Link>
-          </ul>
-          </div>
-      </div>
-      </div>
+          </UserInfo>
+          <Menu>
+          <Link to="/login"><MenuList>Login</MenuList></Link>
+          <Link to="/"><MenuList>Ranking</MenuList></Link>
+          <Link to="/teamselect"><MenuList>Team</MenuList></Link>
+          </Menu>
+          </Content>
+      </Navi>
     </React.Fragment>
   );
 };
