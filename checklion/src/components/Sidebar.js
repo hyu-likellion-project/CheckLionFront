@@ -1,9 +1,22 @@
 import React from "react";
-import Header from './Header'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import logoimg from '../styles/images/logo.png';
+
+
+const Header = styled.div`
+   width: 100%;
+   heigth: 30%;
+   padding: 30px;
+   color : #FF9E1B
+`;
+
+const LogoContainer = styled.span`
+    margin-left : 20px;
+`;
+
 
 const Content = styled.div`
     width: 90%;
@@ -82,10 +95,16 @@ const Sidebar = ({ name, width, height, login  }) => {
 
   return (
     <React.Fragment>
-        <div className="header"
-        onClick={() => toggleMenu()}>
-        <Header  />
-        </div>
+        <Header>
+      <div className="fa-2x">
+        <FontAwesomeIcon 
+        onClick={() => toggleMenu()}
+        icon={faBars} />
+        <LogoContainer>
+        <img src={logoimg} width='180'/>
+        </LogoContainer>
+      </div>
+    </Header>  
       <Navi
         style={{
           transform: `translatex(${xPosition}px)`,
