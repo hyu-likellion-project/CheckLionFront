@@ -6,6 +6,7 @@ import { faBars, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import logoimg from '../styles/images/logo.png';
 
 
+
 const Header = styled.div`
    width: 100%;
    heigth: 30%;
@@ -17,12 +18,22 @@ const LogoContainer = styled.span`
     margin-left : 20px;
 `;
 
+const Container = styled.div`
+    widht : 100%;
+    height : 700px;
+`;
+
+const BodyContainer = styled.div`
+widht : 100%;
+height : 90%;
+`;  
+
+
 
 const Content = styled.div`
-    width: 90%;
+    width: 100%;
     max-width: 300px;
     height: 80%;
-    width: 100%;
     position: absolute;
     border-top-right-radius: 40px;
     background-color:white;
@@ -38,12 +49,14 @@ const UserInfo = styled.div`
 `;
 
 const Navi  = styled.div`
+    z-index: 2;
     transition: 0.3s ease;
-    width: 100%;
+    width: 40%;
     position: fixed;
     height: 90vh;
     width: width,
     minHeight: height
+    
 `;
 
 const Menu = styled.ul`
@@ -105,6 +118,7 @@ const Sidebar = ({ name, width, height, login  }) => {
         </LogoContainer>
       </div>
     </Header>  
+    <Container>
       <Navi
         style={{
           transform: `translatex(${xPosition}px)`,
@@ -142,6 +156,9 @@ const Sidebar = ({ name, width, height, login  }) => {
           </Content>
           
       </Navi>
+      <BodyContainer>
+      </BodyContainer>
+      </Container>
     </React.Fragment>
   );
 };

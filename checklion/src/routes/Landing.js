@@ -11,7 +11,6 @@ function Landing() {
     <div className="Landing">
       <Sidebar login={true} name="관리자" width={300} height={"100vh"}>
       </Sidebar>
-      <Background />
     </div> 
   );
 }
