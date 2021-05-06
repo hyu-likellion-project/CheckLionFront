@@ -1,1 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Encode+Sans+Condensed:400,600');
 
+a {
+    text-decoration: none;
+    color: black;
+}
+
+*{
+    font-family: 'Encode Sans Condensed', sans-serif;
+
+}
