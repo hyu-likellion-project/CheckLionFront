@@ -2,17 +2,20 @@ import React from "react";
 import Header from './Header'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 
 const Content = styled.div`
     width: 90%;
     max-width: 300px;
     margin-top: 70px;
-    height: 100%;
+    height: 70%;
     width: 100%;
     position: absolute;
     border-top-right-radius: 40px;
-    background-color:#ececec;
+    background-color:white;
     font-weight: 600;
+    border:0.5px solid #ececec;
     letter-spacing: .03em;
 `;
 
@@ -26,13 +29,13 @@ const Navi  = styled.div`
     transition: 0.3s ease;
     width: 100%;
     position: fixed;
-    height: 100vh;
+    height: 90vh;
     width: width,
     minHeight: height
 `;
 
 const Menu = styled.ul`
-    height: 100%;
+    height: 65%;
     display: flex;
     flex-direction: column;
 `;
@@ -44,7 +47,25 @@ const MenuList = styled.li`
     transition: color .1s;
 `;
 
-const Sidebar = ({ width, height, login ,children }) => {
+const Logout = styled.div`
+    background-color: #ececec;
+    padding: 10px 5px;
+    display: block;
+    text-transform: uppercase;
+    width:97%;
+    height: 20px;
+`
+const LogoutContent = styled.span`
+    float: right;
+    font-weight: normal;
+    color: #4a4a4a
+`
+
+const LogoutLetter = styled.span`
+    margin-left : 10px;
+` 
+
+const Sidebar = ({ name, width, height, login  }) => {
   const [xPosition, setX] = React.useState(-width);
 
   const toggleMenu = () => {
@@ -73,17 +94,28 @@ const Sidebar = ({ width, height, login ,children }) => {
       >
         <Content>
           <UserInfo>
-            { login ? "환영합니다 관리자님!" : "로그인해주세요" }
+            { login ? "환영합니다 " + name + "님!" : "로그인해주세요" }
           </UserInfo>
           { login ? 
+          <>
           <Menu>   
           <Link to="/login"><MenuList>Login</MenuList></Link>
           <Link to="/"><MenuList>Ranking</MenuList></Link>
           <Link to="/teamselect"><MenuList>Team</MenuList></Link>
-          </Menu> 
+          </Menu>
+          <Logout>
+          <LogoutContent
+          onClick={() => toggleMenu()}
+          >
+          <FontAwesomeIcon icon={faSignOutAlt} rotation={180} />
+          <LogoutLetter>logout</LogoutLetter>
+          </LogoutContent>
+          </Logout>
+          </>
           : null
           }
           </Content>
+          
       </Navi>
     </React.Fragment>
   );
