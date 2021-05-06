@@ -96,10 +96,17 @@ const Sidebar = ({ name, width, height, login  }) => {
           <UserInfo>
             { login ? "환영합니다 " + name + "님!" : "로그인해주세요" }
           </UserInfo>
+          {
+            login ?
+            ""
+            : <Menu>
+            <Link to="/login"><MenuList>Login</MenuList></Link>
+            </Menu> 
+          }
+            
           { login ? 
           <>
           <Menu>   
-          <Link to="/login"><MenuList>Login</MenuList></Link>
           <Link to="/"><MenuList>Ranking</MenuList></Link>
           <Link to="/teamselect"><MenuList>Team</MenuList></Link>
           </Menu>
