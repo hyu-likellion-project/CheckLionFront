@@ -8,8 +8,7 @@ import { faBars, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 const Content = styled.div`
     width: 90%;
     max-width: 300px;
-    margin-top: 70px;
-    height: 70%;
+    height: 80%;
     width: 100%;
     position: absolute;
     border-top-right-radius: 40px;
@@ -35,7 +34,7 @@ const Navi  = styled.div`
 `;
 
 const Menu = styled.ul`
-    height: 65%;
+    height: 70%;
     display: flex;
     flex-direction: column;
 `;
@@ -83,7 +82,7 @@ const Sidebar = ({ name, width, height, login  }) => {
 
   return (
     <React.Fragment>
-        <div className="toggle-menu"
+        <div className="header"
         onClick={() => toggleMenu()}>
         <Header  />
         </div>
