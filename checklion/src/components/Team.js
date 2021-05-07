@@ -13,6 +13,7 @@ const TeamContent = styled.div`
    flex-direction : column;
    justify-content: center;
    align-items: center;
+   background-color : white;
 `;
 
 const ProfileImg = styled.div`

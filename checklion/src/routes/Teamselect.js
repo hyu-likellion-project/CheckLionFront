@@ -1,11 +1,8 @@
 import React from "react";
 import Sidebar from '../components/Sidebar'
 import Team from '../components/Team'
-import Background from '../components/Background'
 import styled from 'styled-components';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
-
+import '../App.css';
 
 const InnerContainer = styled.div`
    width    : 100%;
@@ -50,7 +47,7 @@ const TeamContainer = styled.div`
 function Teamselect() {
   return (
     <div className="Teamselect">
-      <Sidebar login={false} width={300} height={"100vh"}>
+      <Sidebar login={true} width={300} height={"100vh"} name="관리자">
         <InnerContainer>
           <CenterContainer>
           <TitleContainer>

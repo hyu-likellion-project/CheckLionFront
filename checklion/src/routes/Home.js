@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import Background from "../components/Background";
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import logo from '../logo.png';
-import Ranking from '../components/Ranking';
+
 
 const Title = styled.p`
   font-size: 2.3rem;

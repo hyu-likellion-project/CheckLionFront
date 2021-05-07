@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import lion from '../landing-lion.png';
 import logo from '../logo.png';
 

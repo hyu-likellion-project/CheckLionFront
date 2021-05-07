@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import logoimg from '../styles/images/logo.png';
-import Background from "./Background";
+import backgroundimg from '../styles/images/background.png';
 
 
 
@@ -29,12 +29,7 @@ widht : 100%;
 height : 90%;
 `;  
 
-const BackgroundContainer = styled.div`
-widht : 100%;
-height : 90%;
-z-index : -1;
-postion : absolute;
-`;  
+
 
 
 const Content = styled.div`
@@ -114,7 +109,7 @@ const Sidebar = ({ name, width, height, login, children  }) => {
 
 
   return (
-    <React.Fragment>
+    <React.Fragment >
         <Header>
       <div className="fa-2x">
         <FontAwesomeIcon 
@@ -124,8 +119,8 @@ const Sidebar = ({ name, width, height, login, children  }) => {
         <img src={logoimg} width='180'/>
         </LogoContainer>
       </div>
-    </Header>  
-    <Container>
+        </Header>
+    <Container className="Background" >
       <Navi
         style={{
           transform: `translatex(${xPosition}px)`,
@@ -161,9 +156,8 @@ const Sidebar = ({ name, width, height, login, children  }) => {
           : null
           }
           </Content>
-          
       </Navi>
-      <BodyContainer>
+      <BodyContainer styles={{ backgroundImage:`url(${backgroundimg})` }}>
         {
           children
         }

@@ -9,3 +9,8 @@ a {
     font-family: 'Encode Sans Condensed', sans-serif;
 
 }
+
+.Background {
+    background-image: url(./styles/images/background.png);
+    background-size: cover;
+}
