@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import logoimg from '../styles/images/logo.png';
-import backgroundimg from '../styles/images/background.png';
 
 
 
@@ -141,7 +140,7 @@ const Sidebar = ({ name, width, height, login, children  }) => {
           { login ? 
           <>
           <Menu>   
-          <Link to="/"><MenuList>Ranking</MenuList></Link>
+          <Link to="/home"><MenuList>Ranking</MenuList></Link>
           <Link to="/teamselect"><MenuList>Team</MenuList></Link>
           </Menu>
           <Logout>
@@ -157,7 +156,7 @@ const Sidebar = ({ name, width, height, login, children  }) => {
           }
           </Content>
       </Navi>
-      <BodyContainer styles={{ backgroundImage:`url(${backgroundimg})` }}>
+      <BodyContainer>
         {
           children
         }

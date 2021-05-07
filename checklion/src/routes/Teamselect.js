@@ -1,6 +1,6 @@
 import React from "react";
 import Sidebar from '../components/Sidebar'
-import Team from '../components/Team'
+import Teamcard from '../components/Teamcard'
 import styled from 'styled-components';
 import '../App.css';
 
@@ -54,15 +54,15 @@ function Teamselect() {
              <h2>팀을 선택해주세요</h2>
           </TitleContainer>
           <TeamContainer>
-            <Team name="왕십리온" />
-            <Team name="코딩을하지로" />
-            <Team name="건멋" />
+            <Teamcard name="왕십리온" />
+            <Teamcard name="코딩을하지로" />
+            <Teamcard name="건멋" />
           </TeamContainer>
           <TeamContainer>
-            <Team name="Y1K3" />
-            <Team name="NESI" />
-            <Team name="야수의심장" />
-            <Team name="강남멋쟁이" />
+            <Teamcard name="Y1K3" />
+            <Teamcard name="NESI" />
+            <Teamcard name="야수의심장" />
+            <Teamcard name="강남멋쟁이" />
           </TeamContainer> 
           </CenterContainer>
         </InnerContainer>

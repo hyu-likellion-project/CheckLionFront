@@ -30,7 +30,7 @@ align-items: center;
 margin-top : 30px;
 `;
 
-const Team = ({ name,totalscore }) => {
+const Teamcard = ({ name,totalscore }) => {
   return (
     <div>
       <TeamContent>
@@ -45,4 +45,4 @@ const Team = ({ name,totalscore }) => {
   );
 };
 
-export default Team;
+export default Teamcard;
