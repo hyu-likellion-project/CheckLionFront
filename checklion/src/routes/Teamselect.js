@@ -1,12 +1,13 @@
 import React from "react";
 import Sidebar from '../components/Sidebar'
+import Team from '../components/Team'
+import Background from '../components/Background'
 import styled from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 
 
 const InnerContainer = styled.div`
-   border   : 1px solid black;
    width    : 100%;
    height   : 100%;
    display  : flex;
@@ -15,27 +16,30 @@ const InnerContainer = styled.div`
 `;
 
 const CenterContainer = styled.div`
-   border   : 1px solid black;
    width    : 70%;
-   height   : 80%;
+   height   : 100%;
    
 `;
 
-const WeekContainer = styled.div`
-   border   : 1px solid black;
+const TitleContainer = styled.div`
    width    : 100%;
-   height   : 20%;
    display  : flex;
    justify-content: center;
    align-items: center;
+   font-weight : bold;
+   font-size : 1.2rem;
 `;
 
 const TeamContainer = styled.div`
-   border   : 1px solid black;
    width    : 100%;
-   height   : 35%;
+   height   : 40%;
    display  : flex;
+   justify-content: center;
+   align-items: center;
+   margin-bottom : 15px;
 `;
+
+
 
 
 
@@ -49,12 +53,20 @@ function Teamselect() {
       <Sidebar login={false} width={300} height={"100vh"}>
         <InnerContainer>
           <CenterContainer>
-          <WeekContainer>       
-          </WeekContainer>
+          <TitleContainer>
+             <h2>팀을 선택해주세요</h2>
+          </TitleContainer>
           <TeamContainer>
-            </TeamContainer>
-            <TeamContainer>
-            </TeamContainer> 
+            <Team name="왕십리온" />
+            <Team name="코딩을하지로" />
+            <Team name="건멋" />
+          </TeamContainer>
+          <TeamContainer>
+            <Team name="Y1K3" />
+            <Team name="NESI" />
+            <Team name="야수의심장" />
+            <Team name="강남멋쟁이" />
+          </TeamContainer> 
           </CenterContainer>
         </InnerContainer>
       </Sidebar>
