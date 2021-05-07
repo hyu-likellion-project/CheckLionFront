@@ -5,6 +5,8 @@ import Landing from "./routes/Landing";
 import Login from "./routes/Login";
 import Team from "./routes/Team";
 import Teamselect from "./routes/Teamselect";
+import './App.css';
+
 
 
 

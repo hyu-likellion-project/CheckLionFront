@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import lion from '../landing-lion.png';
 import logo from '../logo.png';
 
+
 const Container = styled.div``;
 const Header = styled.div`
   /* background-color: pink; */
@@ -73,11 +74,10 @@ const Footer = styled.div`
 `;
 
 
-
-
 function Landing() {
   return (
     <div className="Landing">
+
       <Container>
       <Header>
         <Logo src={logo} alt='logo' />
@@ -96,6 +96,7 @@ function Landing() {
       <Footer></Footer>
       </Container>
     </div>
+
   );
 }
 
