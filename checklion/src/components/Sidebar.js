@@ -90,7 +90,7 @@ const LogoutLetter = styled.span`
     margin-left : 10px;
 ` 
 
-const Sidebar = ({ name, width, height, login  }) => {
+const Sidebar = ({ name, width, height, login, children  }) => {
   const [xPosition, setX] = React.useState(-width);
 
   const toggleMenu = () => {
@@ -157,6 +157,9 @@ const Sidebar = ({ name, width, height, login  }) => {
           
       </Navi>
       <BodyContainer>
+        {
+          children
+        }
       </BodyContainer>
       </Container>
     </React.Fragment>
