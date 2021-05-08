@@ -16,8 +16,9 @@ const Header = styled.div`
 const Logo = styled.img`
   display: inline-block;
   vertical-align: center;
-  width: 309px;
-  height: 43px;
+  width: 180px;
+  padding-left: 32.5px;
+  padding-top: 3px;
 `;
 const Info = styled.div`
   text-align: center;
@@ -32,7 +33,7 @@ const InfoContainer = styled.div`
   align-items: center;
   justify-content: center;
   vertical-align: center;
-  width: 49%;
+  width: 43%;
 `;
 
 const InfoText = styled.p`
@@ -62,7 +63,7 @@ const Button = styled.button`
 const InfoImage = styled.img`
   display: inline-block;
   padding-top: 15px;
-  width: 700px;
+  width: 600px;
 `;
 
 const Footer = styled.div`
