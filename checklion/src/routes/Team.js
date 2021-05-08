@@ -3,7 +3,7 @@ import Sidebar from '../components/Sidebar'
 import Status from '../components/Status'
 import styled from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight, faChevronCircleLeft, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import '../App.css';
 
 const InnerContainer = styled.div`
@@ -143,14 +143,14 @@ const SubmitButton = styled.button`
   `;
 
 
-function Team() {
+function Team({match}) {
   return (
     <div className="Team">
       <Sidebar login={true} width={300} height={"100vh"} name="관리자">
         <InnerContainer>
           <CenterContainer>
               <TitleContainer>
-                <h1>코딩을 하지로</h1>
+                <h1>{match.params.team}</h1>
               </TitleContainer>
               <WeekContainer>
                 <FontAwesomeIcon size="2x" icon={ faChevronLeft } />

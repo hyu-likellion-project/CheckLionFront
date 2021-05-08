@@ -17,7 +17,7 @@ function App() {
     <Route path="/home" component={Home} />
     <Route path="/login" component={Login} />
     <Route path="/teamselect" component={Teamselect} />
-    <Route path="/team" component={Team} />
+    <Route path="/team/:week/:team" component={Team} />
   </HashRouter>
   );
 }

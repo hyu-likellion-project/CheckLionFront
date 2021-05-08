@@ -1,9 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom';
-import Background from "../components/Background";
-import logo from '../logo.png';
 import styled from 'styled-components';
-import Ranking from '../components/Ranking';
 import Sidebar from '../components/Sidebar';
 import RankingItem from '../components/RankingItem';
 
@@ -27,15 +23,6 @@ const Container = styled.div`
   margin-left: 9rem;
 `;
 
-const Logo = styled.img`
-  display: inline-block;
-  vertical-align: center;
-  z-index: 4;
-  margin-top: 1.7rem;
-  margin-left: 2rem;
-  width: 309px;
-  height: 43px;
-`;
 
 const RankingContainer = styled.div`
   background-color: white;

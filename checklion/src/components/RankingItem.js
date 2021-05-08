@@ -1,11 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
 
-const Team = {
-    rank: 1,
-    name: "코딩을 하지로",
-    score: 42
-}
 
 const Container = styled.div`
     /* background-color: purple; */
