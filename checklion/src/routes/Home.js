@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import Background from "../components/Background";
 import logo from '../logo.png';
+import styled from 'styled-components';
 import Ranking from '../components/Ranking';
 
 
