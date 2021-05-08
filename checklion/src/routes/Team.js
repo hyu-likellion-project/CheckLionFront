@@ -151,7 +151,7 @@ function Team({match}) {
 
   useEffect(() => {
     getWeek()
-  }, [])
+  }, [week])
 
   const getWeek = async () => {
    const _results = await api.getWeek(week)
@@ -160,16 +160,12 @@ function Team({match}) {
 
   const previousWeek = async () => {
     if (week > 0) {
-     const _results = await api.getWeek(week-1)
-     setweekdata(_results.data)
      setweek(week-1)
     }
    }
 
    const nextWeek = async () => {
     if (week < 8) {
-     const _results = await api.getWeek(week+1)
-     setweekdata(_results.data)
      setweek(week+1)
     }
    }
