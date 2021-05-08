@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import Background from "../components/Background";
-import styled from 'styled-components';
 import logo from '../logo.png';
+import Ranking from '../components/Ranking';
+
 
 
 const Title = styled.p`
@@ -49,14 +50,7 @@ const Button = styled.button`
 function Home() {
   return (
     <div>
-      <Logo src={logo} alt='logo' />
-      <Background />
-      <RankingContainer>
-        <Title>Ranking</Title>
-        {/* <Ranking /> */}
-      </RankingContainer>
-      <Link to="/login"><Button>LOGIN</Button></Link>
-      
+      Home
     </div>
   );
   
