@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState,useEffect } from 'react';
 import Sidebar from '../components/Sidebar'
 import Teamcard from '../components/Teamcard'
 import styled from 'styled-components';
+import api from '../api';
 import '../App.css';
 
 const InnerContainer = styled.div`
@@ -45,6 +46,19 @@ const TeamContainer = styled.div`
 
 
 function Teamselect() {
+
+
+  const [teamdata, setTeamdata] = useState([]);
+
+  useEffect(() => {
+    getTeams()
+  }, [])
+
+  const getTeams = async () => {
+   const _results = await api.getAllTeams()
+   setTeamdata(_results.data)
+  }
+
   return (
     <div className="Teamselect">
       <Sidebar login={true} width={300} height={"100vh"} name="관리자">
@@ -54,15 +68,18 @@ function Teamselect() {
              <h2>팀을 선택해주세요</h2>
           </TitleContainer>
           <TeamContainer>
-            <Teamcard name="왕십리온" />
-            <Teamcard name="코딩을하지로" />
-            <Teamcard name="건멋" />
+            {
+              teamdata.map((team, index)=>          
+              index <3 ? <Teamcard name={team.name} />:""
+              )
+            }
           </TeamContainer>
           <TeamContainer>
-            <Teamcard name="Y1K3" />
-            <Teamcard name="NESI" />
-            <Teamcard name="야수의심장" />
-            <Teamcard name="강남멋쟁이" />
+          {
+              teamdata.map((team, index)=>          
+              index >2 ? <Teamcard name={team.name} />:""
+              )
+            }
           </TeamContainer> 
           </CenterContainer>
         </InnerContainer>
