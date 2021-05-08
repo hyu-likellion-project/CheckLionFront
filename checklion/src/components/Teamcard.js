@@ -1,6 +1,8 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import profileimg from '../styles/images/profile.jpg';
+
 
 
 const TeamContent = styled.div`
@@ -33,6 +35,7 @@ margin-top : 30px;
 const Teamcard = ({ name,totalscore }) => {
   return (
     <div>
+      <Link to={`/team/${name}`}>
       <TeamContent>
         <ProfileImg>
         <img src={profileimg} width='100'/>
@@ -41,6 +44,7 @@ const Teamcard = ({ name,totalscore }) => {
         <h3>{name}</h3>
         </NameContent>
       </TeamContent>
+      </Link>
     </div>
   );
 };

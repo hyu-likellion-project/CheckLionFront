@@ -146,16 +146,33 @@ const SubmitButton = styled.button`
 
 function Team({match}) {
 
-  const [weekdata, setWeekdata] = useState([]);
+  const [week, setweek] = useState(1);
+  const [weekdata, setweekdata] = useState([]);
 
   useEffect(() => {
     getWeek()
   }, [])
 
   const getWeek = async () => {
-   const _results = await api.getWeek(match.params.week)
-   setWeekdata(_results.data)
+   const _results = await api.getWeek(week)
+   setweekdata(_results.data)
   }
+
+  const previousWeek = async () => {
+    if (week > 0) {
+     const _results = await api.getWeek(week-1)
+     setweekdata(_results.data)
+     setweek(week-1)
+    }
+   }
+
+   const nextWeek = async () => {
+    if (week < 8) {
+     const _results = await api.getWeek(week+1)
+     setweekdata(_results.data)
+     setweek(week+1)
+    }
+   }
 
 
 
@@ -165,12 +182,16 @@ function Team({match}) {
         <InnerContainer>
           <CenterContainer>
               <TitleContainer>
-                <h1>{match.params.team}</h1>
+                <h1>{match.params.name}</h1>
               </TitleContainer>
               <WeekContainer>
-                <FontAwesomeIcon size="2x" icon={ faChevronLeft } />
+                <FontAwesomeIcon size="2x" icon={ faChevronLeft }
+                  onClick={() => previousWeek()}
+                />
                 <WeekSpan><h2>{"Week " + weekdata.weeknumber + " : " + weekdata.info}</h2></WeekSpan>
-                <FontAwesomeIcon size="2x" icon={ faChevronRight } />
+                <FontAwesomeIcon size="2x" icon={ faChevronRight } 
+                   onClick={() => nextWeek()}
+                />
               </WeekContainer>
               <StatusWrapper>
                 <StatusContainer>
