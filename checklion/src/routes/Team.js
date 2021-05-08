@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState,useEffect } from 'react';
 import Sidebar from '../components/Sidebar'
 import Status from '../components/Status'
 import styled from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import api from '../api';
 import '../App.css';
 
 const InnerContainer = styled.div`
@@ -144,6 +145,20 @@ const SubmitButton = styled.button`
 
 
 function Team({match}) {
+
+  const [weekdata, setWeekdata] = useState([]);
+
+  useEffect(() => {
+    getWeek()
+  }, [])
+
+  const getWeek = async () => {
+   const _results = await api.getWeek(match.params.week)
+   setWeekdata(_results.data)
+  }
+
+
+
   return (
     <div className="Team">
       <Sidebar login={true} width={300} height={"100vh"} name="관리자">
@@ -154,7 +169,7 @@ function Team({match}) {
               </TitleContainer>
               <WeekContainer>
                 <FontAwesomeIcon size="2x" icon={ faChevronLeft } />
-                <WeekSpan><h2>Week 1 : HTML,CSS</h2></WeekSpan>
+                <WeekSpan><h2>{"Week " + weekdata.weeknumber + " : " + weekdata.info}</h2></WeekSpan>
                 <FontAwesomeIcon size="2x" icon={ faChevronRight } />
               </WeekContainer>
               <StatusWrapper>

@@ -8,6 +8,10 @@ export default {
         return axios.get('/team/')
     },
 
+    getWeek(weeknum) {
+        return axios.get('/check/week/'+weeknum+"/")
+    },
+
     createPost(data) {
         return axios.post('/posts/', data)
     },
