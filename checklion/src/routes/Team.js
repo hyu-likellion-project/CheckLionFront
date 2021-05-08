@@ -139,7 +139,6 @@ const SubmitButton = styled.button`
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    font-weight : bold;
     border-radius : 12px;
   `;
 
@@ -175,7 +174,7 @@ function Team() {
                       <h3>추가점수</h3>
                     </RightTableHeaderContainer>
                     <AdditionPointContainer>
-                    <Button>1</Button>
+                    <Button >2</Button>
                     </AdditionPointContainer>
                   </RightStatusContainer>
                 </StatusContainer>

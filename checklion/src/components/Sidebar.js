@@ -55,7 +55,6 @@ const Navi  = styled.div`
     width: 40%;
     position: fixed;
     height: 90vh;
-    width: width,
     minHeight: height
     
 `;
