@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import styled, { css } from 'styled-components';
 import lion from '../landing-lion.png';
+import styled from 'styled-components';
 import logo from '../logo.png';
+
+
 
 const Container = styled.div``;
 const Header = styled.div`
@@ -72,9 +74,6 @@ const Footer = styled.div`
 
 `;
 
-
-
-
 function Landing() {
   return (
     <div className="Landing">
@@ -96,6 +95,7 @@ function Landing() {
       <Footer></Footer>
       </Container>
     </div>
+
   );
 }
 
