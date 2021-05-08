@@ -9,7 +9,7 @@ import logoimg from '../styles/images/logo.png';
 
 const Header = styled.div`
    width: 100%;
-   heigth: 30%;
+   height: 30%;
    padding: 30px;
    color : #FF9E1B
 `;
@@ -19,13 +19,13 @@ const LogoContainer = styled.span`
 `;
 
 const Container = styled.div`
-    widht : 100%;
+    width : 100%;
     height : 700px;
 `;
 
 const BodyContainer = styled.div`
-widht : 100%;
-height : 90%;
+    width : 100%;
+    height : 90%;
 `;  
 
 
@@ -55,7 +55,7 @@ const Navi  = styled.div`
     width: 40%;
     position: fixed;
     height: 90vh;
-    minHeight: height
+    min-height: height;
     
 `;
 
@@ -114,7 +114,7 @@ const Sidebar = ({ name, width, height, login, children  }) => {
         onClick={() => toggleMenu()}
         icon={faBars} />
         <LogoContainer>
-        <img src={logoimg} width='180'/>
+        <img src={logoimg} alt="logo" width='180'/>
         </LogoContainer>
       </div>
         </Header>

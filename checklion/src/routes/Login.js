@@ -10,8 +10,9 @@ const Container = styled.div`
 `;
 
 const Header = styled.div`
-  width: 100%;
-  height: 100px;
+  padding-left: 45px;
+  padding-top: 35px;
+  padding-bottom: 30px;
 `;
 
 const Body = styled.div`
@@ -21,10 +22,9 @@ const Body = styled.div`
 const Logo = styled.img`
   display: inline-block;
   vertical-align: center;
-  width: 309px;
-  height: 43px;
-  margin-top: 1.7rem;
-  margin-left: 2rem;
+  width: 180px;
+  padding-left: 32.5px;
+  padding-top: 3px;
 `;
 
 const Footer = styled.div`
