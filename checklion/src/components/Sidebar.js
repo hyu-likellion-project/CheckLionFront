@@ -101,9 +101,7 @@ const Sidebar = ({ name, width, height, login, children  }) => {
     }
   };
 
-  React.useEffect(() => {
-    setX(0);
-  }, []);
+  
 
 
   return (
