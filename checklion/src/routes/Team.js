@@ -165,9 +165,9 @@ function Team({match}) {
                       <TableHeader><h3>출석</h3></TableHeader>
                       <TableHeader><h3>강의</h3></TableHeader>
                     </TableHeaderContainer>
-                    <Status />
-                    <Status />
-                    <Status />
+                    <Status name="윤승권" assignment={true} attendance={false} lecture={true} />
+                    <Status name="박수경" assignment={true} attendance={false} lecture={true}/>
+                    <Status name="손정범" assignment={true} attendance={false} lecture={true}/>
                   </LeftStatusContainer>
                   <RightStatusContainer>
                     <RightTableHeaderContainer>

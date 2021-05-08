@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState,useEffect } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserAlt, faToggleOn, faToggleOff } from "@fortawesome/free-solid-svg-icons";
 import styled from 'styled-components';
@@ -37,7 +37,14 @@ const CircleDiv = styled.span`
 
 const Toggle = false;
 
-function Status() {
+function Status({name, assignment, attendance, lecture}) {
+
+  const [firstToggle, setfirstToggle] = useState(assignment);
+  const [secondToggle, setsecondToggle] = useState(attendance);
+  const [thirdToggle, setthirdToggle] = useState(lecture);
+
+  
+
   
 
   return (
@@ -48,16 +55,22 @@ function Status() {
           </CircleDiv> 
       </InnerStatus>
       <InnerStatus>
-          <h3>윤승권</h3>
+          <h3>{name}</h3>
       </InnerStatus>
       <InnerStatus>
-        <FontAwesomeIcon color="#FF9E1B" size="3x" icon={ Toggle ? faToggleOn :faToggleOff} />
+        <FontAwesomeIcon color="#FF9E1B" size="3x" icon={ firstToggle ? faToggleOn :faToggleOff} 
+        onClick={() => setfirstToggle(!firstToggle)}
+        />
       </InnerStatus>
       <InnerStatus>
-      <FontAwesomeIcon color="#FF9E1B" size="3x" icon={ Toggle ? faToggleOn :faToggleOff} />
+      <FontAwesomeIcon color="#FF9E1B" size="3x" icon={ secondToggle ? faToggleOn :faToggleOff} 
+        onClick={() => setsecondToggle(!secondToggle)}
+      />
       </InnerStatus>
       <InnerStatus>
-      <FontAwesomeIcon color="#FF9E1B" size="3x" icon={ Toggle ? faToggleOn :faToggleOff} />
+      <FontAwesomeIcon color="#FF9E1B" size="3x" icon={ thirdToggle ? faToggleOn :faToggleOff} 
+        onClick={() => setthirdToggle(!thirdToggle)}
+      />
       </InnerStatus>
     </Container>  
   );
