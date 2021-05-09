@@ -1,15 +1,8 @@
-import React from "react";
+import React, { useState,useEffect } from 'react';
 import styled from 'styled-components';
 import Sidebar from '../components/Sidebar';
 import RankingItem from '../components/RankingItem';
-
-// const numbers = [1, 2, 3, 4, 5, 6, 7]
-// const Teams = ['코딩을 하지로', '왕십리온', '강남사자', '야수의 심장', '건멋', 'NESI', 'Y1K3']
-// const points = [42, 37, 34, 32, 26, 21, 17]
-
-// const Team = {
-
-// }
+import api from '../api';
 
 const Title = styled.p`
   font-size: 1.85rem;
@@ -51,6 +44,18 @@ const Button = styled.button`
 `;
 
 function Home() {
+
+  const [teamdata, setTeamdata] = useState([]);
+
+  useEffect(() => {
+    getTeams()
+  }, [])
+
+  const getTeams = async () => {
+   const _results = await api.getAllTeams()
+   setTeamdata(_results.data)
+  }
+
   return (
     <div>
       <Sidebar login={true} width={300} height={"100vh"} name="관리자">
@@ -59,13 +64,11 @@ function Home() {
         <RankingContainer>
           <RankingItem rank={'순위'} name={"팀명"} score={"점수"}></RankingItem>
           <hr style={{width: '600px'}}></hr>
-          <RankingItem rank={1} name={'코딩을 하지로'} score={42}></RankingItem>
-          <RankingItem rank={2} name={'왕십리온'} score={37}></RankingItem>
-          <RankingItem rank={3} name={'강남사자'} score={42}></RankingItem>
-          <RankingItem rank={4} name={'야수의 심장'} score={42}></RankingItem>
-          <RankingItem rank={5} name={'건멋'} score={42}></RankingItem>
-          <RankingItem rank={6} name={'NESI'} score={42}></RankingItem>
-          <RankingItem rank={7} name={'Y1K3'} score={42}></RankingItem>
+          {
+              teamdata.map((team, index)=>          
+              <RankingItem rank={index+1} name={team.name} score={team.totalScore}/>
+              )
+            }
         </RankingContainer>
       </Container> 
       </Sidebar>
