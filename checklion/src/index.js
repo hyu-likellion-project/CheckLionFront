@@ -4,6 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// App.get('/api/rest-auth/logout', auth, (req, res) => {
+//   User.findOneAndUpdate({_id: req.user._id},
+//       {token:""},    //토큰 삭제
+//       (err, user) => {    //콜백 함수
+//       if(err) return res.json({ success: false, err});
+//       return res.status(200).send({
+//           success: true
+//       })
+//       })
+// });
+
 ReactDOM.render(
   <React.StrictMode>
     <App />

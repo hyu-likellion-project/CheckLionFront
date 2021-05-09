@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link, useHistory } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import logo from '../logo.png';
+import axios from 'axios';
 
 const Container = styled.div`
   width: 100%;
@@ -69,10 +70,13 @@ const InputBox = styled.div`
   }
 `;
 
-
 function Login() {
+
   const [userid, setUserid] = useState('');
   const [password, setPassword] = useState('');
+  const history = useHistory();
+  const data = {username: userid, password: password}
+  const API = "http://localhost:8000";
 
   const idOnChange = (e) => {
     setUserid(e.target.value);
@@ -80,6 +84,38 @@ function Login() {
 
   const passOnChange = (e) => {
     setPassword(e.target.value);
+  }
+
+
+  // 로그인 상태 유지할 때 쓰는 상수
+  // const JWT_EXPIRY_TOKEN = 1 * 3600 * 1000;
+
+  const onLogin = () => {
+    fetch(API, {
+      method: "POST",
+      headers: {
+        "Access-Control-Allow-Headers" : "Content-Type",
+        "Access-Control-Allow-Origin": "http://localhost:8000",
+        "Access-Control-Allow-Methods": "OPTIONS,POST"
+    },
+      body: JSON.stringify({
+        username: userid,
+        password: password
+      }),
+    })
+      .then(response => response.json())
+      .then(result => {
+        if(result.Authorization){
+          console.log(result.Authorization)
+          localStorage.setItem("token", result.Authorization);
+        }
+        console.log(result.Authorization)
+      });
+  };
+
+  const checkToken = () => {
+    const token = localStorage.getItem("token");
+    alert(token)
   }
 
   return (
@@ -94,14 +130,14 @@ function Login() {
         <form>
           <InputBox>
             <label style={{marginRight: '5px'}}>ID </label>
-            <input style={{borderRadius: '5px'}} type="text" placeholder="아이디를 입력해주세요" value={userid} onChange={idOnChange} />
+            <input style={{borderRadius: '5px'}} type="text" value={userid} onChange={ idOnChange } />
           </InputBox>
           <InputBox>
             <label style={{marginRight: '5px'}}>PW </label>
-            <input style={{borderRadius: '5px'}} type="password" placeholder="비밀번호를 입력해주세요" value={password} onChange={passOnChange} />
+            <input style={{borderRadius: '5px'}} type="password" value={password} onChange={ passOnChange } />
           </InputBox>
             <br />
-            <Button>
+            <Button onClick={ onLogin } >
                 입장하기
             </Button>
         </form>
