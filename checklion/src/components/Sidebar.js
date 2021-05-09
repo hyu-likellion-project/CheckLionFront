@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from 'react-router-dom';
+import React, { useState,useEffect } from "react";
+import { Link,useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
@@ -90,8 +90,13 @@ const LogoutLetter = styled.span`
     margin-left : 10px;
 ` 
 
-const Sidebar = ({ name, width, height, login, children  }) => {
+const Sidebar = ({ name, width, height, login, children, }) => {
   const [xPosition, setX] = React.useState(-width);
+  const [token, setToken] = useState(
+    () => JSON.parse(window.localStorage.getItem("token")) || ''
+  );
+  
+  const history = useHistory();
 
   const toggleMenu = () => {
     if (xPosition < 0) {
@@ -100,6 +105,12 @@ const Sidebar = ({ name, width, height, login, children  }) => {
       setX(-width);
     }
   };
+
+  const logoutToken = () => {
+    localStorage.removeItem('token');
+    alert("로그아웃되었습니다.")
+    history.push('/home');
+  }
 
   
 
@@ -124,17 +135,17 @@ const Sidebar = ({ name, width, height, login, children  }) => {
       >
         <Content>
           <UserInfo>
-            { login ? "환영합니다 " + name + "님!" : "로그인해주세요" }
+            { token ? "환영합니다 " + name + "님!" : "로그인해주세요" }
           </UserInfo>
           {
-            login ?
+            token ?
             ""
             : <Menu>
             <Link to="/login"><MenuList>Login</MenuList></Link>
             </Menu> 
           }
             
-          { login ? 
+          { token ? 
           <>
           <Menu>   
           <Link to="/home"><MenuList>Ranking</MenuList></Link>
@@ -142,10 +153,10 @@ const Sidebar = ({ name, width, height, login, children  }) => {
           </Menu>
           <Logout>
           <LogoutContent
-          onClick={() => toggleMenu()}
+          onClick={() => logoutToken()}
           >
           <FontAwesomeIcon icon={faSignOutAlt} rotation={180} />
-          <LogoutLetter>logout</LogoutLetter>
+          <LogoutLetter >logout</LogoutLetter>
           </LogoutContent>
           </Logout>
           </>

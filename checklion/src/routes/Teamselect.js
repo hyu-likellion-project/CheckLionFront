@@ -70,14 +70,14 @@ function Teamselect() {
           <TeamContainer>
             {
               teamdata.map((team, index)=>          
-              index <3 ? <Teamcard name={team.name} />:""
+              index <3 ? <Teamcard id={team.id} name={team.name} />:""
               )
             }
           </TeamContainer>
           <TeamContainer>
           {
               teamdata.map((team, index)=>          
-              index >2 ? <Teamcard name={team.name} />:""
+              index >2 ? <Teamcard id={team.id} name={team.name} />:""
               )
             }
           </TeamContainer> 

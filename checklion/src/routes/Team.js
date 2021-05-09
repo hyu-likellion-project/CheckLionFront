@@ -148,15 +148,45 @@ function Team({match}) {
 
   const [week, setweek] = useState(1);
   const [weekdata, setweekdata] = useState([]);
+  const [teamdata, setteamdata] = useState([]);
+  const [studentdata, setstudentdata] = useState([]);
+  const [studentiddata, setstudentiddata] = useState([]);
+  
 
-  useEffect(() => {
+
+  useEffect( async () => {
     getWeek()
+    getTeam()
+    getStudents()
+    getStatus()
   }, [week])
 
   const getWeek = async () => {
    const _results = await api.getWeek(week)
    setweekdata(_results.data)
   }
+
+  const getTeam = async () => {
+    const _results = await api.getTeam(match.params.id)
+    setteamdata(_results.data)
+   }
+
+  const getStudents = async () => {
+    const _results = await api.getStudents(match.params.id)
+    const students = _results.data.map((student, index)=> student.user_name)
+    const studentids = _results.data.map((student, index)=> student.id)
+    setstudentiddata(studentids)
+    setstudentdata(students)
+   }
+
+   const getStatus = async () => {
+    const firststatus = await api.getStatus(studentiddata[0],week)
+    const secondstatus = await api.getStatus(studentiddata[1],week)
+    const thirdstatus = await api.getStatus(studentiddata[2],week)
+    const statuss = [firststatus.data,secondstatus.data,thirdstatus.data] 
+    console.log(statuss[0])
+   }
+
 
   const previousWeek = async () => {
     if (week > 0) {
@@ -178,7 +208,7 @@ function Team({match}) {
         <InnerContainer>
           <CenterContainer>
               <TitleContainer>
-                <h1>{match.params.name}</h1>
+                <h1>{teamdata.name}</h1>
               </TitleContainer>
               <WeekContainer>
                 <FontAwesomeIcon size="2x" icon={ faChevronLeft }
@@ -197,9 +227,8 @@ function Team({match}) {
                       <TableHeader><h3>출석</h3></TableHeader>
                       <TableHeader><h3>강의</h3></TableHeader>
                     </TableHeaderContainer>
-                    <Status name="윤승권" assignment={true} attendance={false} lecture={true} />
-                    <Status name="박수경" assignment={true} attendance={false} lecture={true}/>
-                    <Status name="손정범" assignment={true} attendance={false} lecture={true}/>
+                   { studentdata.map((student, index)=>
+                    <Status name={studentdata[index]} id={studentiddata[index]} week={weekdata.weeknumber}   />) }
                   </LeftStatusContainer>
                   <RightStatusContainer>
                     <RightTableHeaderContainer>

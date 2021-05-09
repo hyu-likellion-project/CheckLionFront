@@ -32,10 +32,10 @@ align-items: center;
 margin-top : 30px;
 `;
 
-const Teamcard = ({ name,totalscore }) => {
+const Teamcard = ({ id,name,totalscore }) => {
   return (
     <div>
-      <Link to={`/team/${name}`}>
+      <Link to={`/team/${id}`}>
       <TeamContent>
         <ProfileImg>
         <img src={profileimg} width='100'/>

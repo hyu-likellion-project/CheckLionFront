@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import React, { useState,useEffect } from "react";
+import { Link,useHistory } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import logo from '../logo.png';
+import api from '../api';
 
 const Container = styled.div`
   width: 100%;
@@ -73,6 +74,15 @@ const InputBox = styled.div`
 function Login() {
   const [userid, setUserid] = useState('');
   const [password, setPassword] = useState('');
+  const [token, setToken] = useState(
+    () => JSON.parse(window.localStorage.getItem("token")) || ''
+  );
+  const data = {username: userid, password: password}
+  const history = useHistory();
+
+  
+
+  
 
   const idOnChange = (e) => {
     setUserid(e.target.value);
@@ -81,6 +91,19 @@ function Login() {
   const passOnChange = (e) => {
     setPassword(e.target.value);
   }
+
+  
+
+  const onLogin = async () => {
+    const tokendata = await api.login(data)
+    if(tokendata) {
+      alert("로그인에 성공했습니다.")
+      window.localStorage.setItem("token", JSON.stringify(tokendata.data.key))
+      history.push('/home');
+    }      
+  };
+
+
 
   return (
     <Container>
@@ -101,7 +124,7 @@ function Login() {
             <input style={{borderRadius: '5px'}} type="password" placeholder="비밀번호를 입력해주세요" value={password} onChange={passOnChange} />
           </InputBox>
             <br />
-            <Button>
+            <Button onClick={ onLogin }>
                 입장하기
             </Button>
         </form>

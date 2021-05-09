@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserAlt, faToggleOn, faToggleOff } from "@fortawesome/free-solid-svg-icons";
 import styled from 'styled-components';
+import api from '../api';
 
 
 
@@ -35,13 +36,29 @@ const CircleDiv = styled.span`
 
 
 
-const Toggle = false;
 
-function Status({name, assignment, attendance, lecture}) {
 
-  const [firstToggle, setfirstToggle] = useState(assignment);
-  const [secondToggle, setsecondToggle] = useState(attendance);
-  const [thirdToggle, setthirdToggle] = useState(lecture);
+function Status({name, id, week}) {
+
+  const [statusdata, setstatusdata] = useState([]);
+
+  useEffect( async () => {
+    getStatus()
+  }, [])
+
+
+  const getStatus = async () => {
+    const status = await api.getStatus(id,1)
+    setfirstToggle(status.data.assignment)
+    setsecondToggle(status.data.assignment)
+    setthirdToggle(status.data.assignment)
+    setstatusdata(status.data)
+   }
+
+  const [firstToggle, setfirstToggle] = useState();
+  const [secondToggle, setsecondToggle] = useState(true);
+  const [thirdToggle, setthirdToggle] = useState(true);
+  
 
   
 
