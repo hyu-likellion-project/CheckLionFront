@@ -28,6 +28,14 @@ export default {
         
     },
 
+    async getTeamPoint(teamid,week) {
+        const result_  = await axios.get('/check/teampoint/?teamid='+teamid+"&week="+week);
+        const data = {id :result_.data[0].id , additionalPoint : result_.data[0].additionalPoint};
+        return data;
+    },
+
+
+
     login(data) {
         return axios.post('/rest-auth/login/', data)
         .catch(error => {

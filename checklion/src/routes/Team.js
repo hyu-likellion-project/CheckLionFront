@@ -179,8 +179,7 @@ function Team({match}) {
   const [firststatus, setfirststatus] = useState([]);
   const [secondstatus, setsecondstatus] = useState([]);
   const [thirdstatus, setthirdstatus] = useState([]);
-
-  const statuss = ['first','second','third'];
+  const [teampoint, setteampoint] = useState([]);
 
   useEffect( () => {
     getTeam()
@@ -190,6 +189,7 @@ function Team({match}) {
   useEffect( () => {
     getWeek();
     getStudentStatus();
+    getTeamPoint();
   }, [week])
 
   const getTeam = async () => {
@@ -208,6 +208,11 @@ function Team({match}) {
   const getWeek = async () => {
     const _results = await api.getWeek(week)
    setweekdata(_results.data)
+  }
+
+  const getTeamPoint = async () => {
+   const _results = await api.getTeamPoint(match.params.id,week);
+   setteampoint(_results);
   }
 
   const getStudentStatus = async () => {
@@ -381,7 +386,20 @@ function Team({match}) {
                       <h3>추가점수</h3>
                     </RightTableHeaderContainer>
                     <AdditionPointContainer>
-                    <Button >2</Button>
+                    <Button 
+                    onClick={()=> {
+                      teampoint.additionalPoint == 3 ?
+                      setteampoint({
+                        ...teampoint,
+                        additionalPoint: 0
+                      })
+                      :
+                      setteampoint({
+                        ...teampoint,
+                        additionalPoint: teampoint.additionalPoint+1
+                      })
+                    }}
+                    >{teampoint.additionalPoint}</Button>
                     </AdditionPointContainer>
                   </RightStatusContainer>
                 </StatusContainer>
@@ -394,7 +412,7 @@ function Team({match}) {
           </CenterContainer>  
         </InnerContainer>
       </Sidebar>
-      <button onClick={()=>{console.log(firststatus)}}>상태확인</button>
+      <button onClick={()=>{console.log(teampoint)}}>상태확인</button>
     </div>
   );
 }
