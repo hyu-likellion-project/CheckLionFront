@@ -28,20 +28,7 @@ const RankingContainer = styled.div`
   border: 1px solid #ECECEC;
 `;
 
-const Button = styled.button`
-  z-index: 2;
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  font-size: 20px;
-  border: none;
-  background: none;
-  cursor: pointer;
-  font-family: 'nexon-bold';
-  &:hover {
-    color: #ff9e1b;
-  }
-`;
+
 
 function Home() {
 

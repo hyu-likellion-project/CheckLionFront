@@ -17,12 +17,15 @@ export default {
         return axios.get('/team/'+teamid+"/")
     },
 
-    getStudents(teamid) {
-        return axios.get('/student/?teamid='+teamid)
+    async getStudents(teamid) {
+        const result_ = await axios.get('/student/?teamid='+teamid)
+        return result_.data
     },
 
-    getStatus(studentid,week) {
-        return axios.get('/check/status/?studentid='+studentid+"&week="+week)
+    async getStatus(studentid,week) {
+        const result_ = await axios.get('/check/status/?studentid='+studentid+"&week="+week)
+        return result_.data[0]
+        
     },
 
     login(data) {

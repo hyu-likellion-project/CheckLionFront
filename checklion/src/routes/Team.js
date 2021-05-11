@@ -3,7 +3,7 @@ import Sidebar from '../components/Sidebar'
 import Status from '../components/Status'
 import styled from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight, faChevronLeft,faUserAlt, faToggleOn, faToggleOff } from "@fortawesome/free-solid-svg-icons";
 import api from '../api';
 import '../App.css';
 
@@ -143,49 +143,87 @@ const SubmitButton = styled.button`
     border-radius : 12px;
   `;
 
+  const Container = styled.div`
+   width: 100%;
+   height: 25%;
+   display : flex;
+
+`;
+
+const InnerStatus = styled.div`
+    width: 20%;
+    height: 100%;
+    display : flex;
+    justify-content: center;
+    align-items : center;
+`;
+
+const CircleDiv = styled.span`
+    width: 40%;
+    height: 70%;
+    border-radius : 50%;
+    background-color : #ececec;
+    display : flex;
+    justify-content: center;
+    align-items : center;
+`;
+
 
 function Team({match}) {
 
   const [week, setweek] = useState(1);
+  const [teamname, setteamname] = useState("");
   const [weekdata, setweekdata] = useState([]);
-  const [teamdata, setteamdata] = useState([]);
-  const [studentdata, setstudentdata] = useState([]);
-  const [studentiddata, setstudentiddata] = useState([]);
-  
+  const [studentnames, setstudentnames ] = useState([]);
+  const [statusdata, setstatusdata] = useState([]);
+  const [firststatus, setfirststatus] = useState([]);
+  const [secondstatus, setsecondstatus] = useState([]);
+  const [thirdstatus, setthirdstatus] = useState([]);
 
+  const statuss = ['first','second','third'];
 
-  useEffect( async () => {
-    getWeek()
+  useEffect( () => {
     getTeam()
-    getStudents()
-    getStatus()
+    getStudentNames()
+  }, [])
+
+  useEffect( () => {
+    getWeek();
+    getStudentStatus();
   }, [week])
 
+  const getTeam = async () => {
+    const {data: { name } }
+     = await api.getTeam(match.params.id)
+    setteamname(name)
+  }
+
+
+  const getStudentNames = async () => {
+    const result = await api.getStudents(match.params.id)
+    const studentnames = result.map((student)=>student.user_name)
+    setstudentnames(studentnames)
+  }
+
   const getWeek = async () => {
-   const _results = await api.getWeek(week)
+    const _results = await api.getWeek(week)
    setweekdata(_results.data)
   }
 
-  const getTeam = async () => {
-    const _results = await api.getTeam(match.params.id)
-    setteamdata(_results.data)
+  const getStudentStatus = async () => {
+    const result = await api.getStudents(match.params.id)
+    const studentids = result.map((student)=>student.id)
+    let statuss = []
+    for( let index in studentids){
+      const statusresult = await api.getStatus(studentids[index],week)
+      statuss.push(statusresult)
+    }
+    setstatusdata(statuss)
+    setfirststatus(statuss[0])
+    setsecondstatus(statuss[1])
+    setthirdstatus(statuss[2])
    }
 
-  const getStudents = async () => {
-    const _results = await api.getStudents(match.params.id)
-    const students = _results.data.map((student, index)=> student.user_name)
-    const studentids = _results.data.map((student, index)=> student.id)
-    setstudentiddata(studentids)
-    setstudentdata(students)
-   }
-
-   const getStatus = async () => {
-    const firststatus = await api.getStatus(studentiddata[0],week)
-    const secondstatus = await api.getStatus(studentiddata[1],week)
-    const thirdstatus = await api.getStatus(studentiddata[2],week)
-    const statuss = [firststatus.data,secondstatus.data,thirdstatus.data] 
-    console.log(statuss[0])
-   }
 
 
   const previousWeek = async () => {
@@ -208,7 +246,7 @@ function Team({match}) {
         <InnerContainer>
           <CenterContainer>
               <TitleContainer>
-                <h1>{teamdata.name}</h1>
+                <h1>{teamname}</h1>
               </TitleContainer>
               <WeekContainer>
                 <FontAwesomeIcon size="2x" icon={ faChevronLeft }
@@ -226,9 +264,117 @@ function Team({match}) {
                       <TableHeader><h3>과제</h3></TableHeader>
                       <TableHeader><h3>출석</h3></TableHeader>
                       <TableHeader><h3>강의</h3></TableHeader>
-                    </TableHeaderContainer>
-                   { studentdata.map((student, index)=>
-                    <Status name={studentdata[index]} id={studentiddata[index]} week={weekdata.weeknumber}   />) }
+                    </TableHeaderContainer>  
+
+    <Container>
+      <InnerStatus>
+          <CircleDiv>
+             <FontAwesomeIcon color="#555555" size="2x" icon={faUserAlt} />
+          </CircleDiv> 
+      </InnerStatus>
+      <InnerStatus>
+          <h3>{studentnames[0]}</h3>
+      </InnerStatus>
+      <InnerStatus>
+        <FontAwesomeIcon color="#FF9E1B" size="3x" icon={ firststatus.assignment ? faToggleOn :faToggleOff} 
+        onClick={() => setfirststatus({
+          ...firststatus,
+          assignment : !firststatus.assignment
+        })}
+        />
+      </InnerStatus>
+      <InnerStatus>
+      <FontAwesomeIcon color="#FF9E1B" size="3x" icon={ firststatus.attendance ? faToggleOn :faToggleOff} 
+        onClick={() => setfirststatus({
+        ...firststatus,
+        attendance : !firststatus.attendance
+      })}
+      />
+      </InnerStatus>
+      <InnerStatus>
+      <FontAwesomeIcon color="#FF9E1B" size="3x" icon={ firststatus.lecture ? faToggleOn :faToggleOff} 
+      onClick={() => setfirststatus({
+        ...firststatus,
+        lecture : !firststatus.lecture
+      })}
+      />
+      </InnerStatus>
+    </Container>
+
+    <Container>
+      <InnerStatus>
+          <CircleDiv>
+             <FontAwesomeIcon color="#555555" size="2x" icon={faUserAlt} />
+          </CircleDiv> 
+      </InnerStatus>
+      <InnerStatus>
+          <h3>{studentnames[1]}</h3>
+      </InnerStatus>
+      <InnerStatus>
+        <FontAwesomeIcon color="#FF9E1B" size="3x" icon={ secondstatus.assignment ? faToggleOn :faToggleOff} 
+        onClick={() => setsecondstatus({
+          ...secondstatus,
+          assignment : !secondstatus.assignment
+        })}
+        />
+      </InnerStatus>
+      <InnerStatus>
+      <FontAwesomeIcon color="#FF9E1B" size="3x" icon={ secondstatus.attendance ? faToggleOn :faToggleOff} 
+        onClick={() => setsecondstatus({
+        ...secondstatus,
+        attendance : !secondstatus.attendance
+      })}
+      />
+      </InnerStatus>
+      <InnerStatus>
+      <FontAwesomeIcon color="#FF9E1B" size="3x" icon={ secondstatus.lecture ? faToggleOn :faToggleOff} 
+      onClick={() => setsecondstatus({
+        ...secondstatus,
+        lecture : !secondstatus.lecture
+      })}
+      />
+      </InnerStatus>
+    </Container>
+
+    <Container>
+      <InnerStatus>
+          <CircleDiv>
+             <FontAwesomeIcon color="#555555" size="2x" icon={faUserAlt} />
+          </CircleDiv> 
+      </InnerStatus>
+      <InnerStatus>
+          <h3>{studentnames[2]}</h3>
+      </InnerStatus>
+      <InnerStatus>
+        <FontAwesomeIcon color="#FF9E1B" size="3x" icon={ thirdstatus.assignment ? faToggleOn :faToggleOff} 
+        onClick={() => setthirdstatus({
+          ...thirdstatus,
+          assignment : !thirdstatus.assignment
+        })}
+        />
+      </InnerStatus>
+      <InnerStatus>
+      <FontAwesomeIcon color="#FF9E1B" size="3x" icon={ thirdstatus.attendance ? faToggleOn :faToggleOff} 
+        onClick={() => setthirdstatus({
+        ...thirdstatus,
+        attendance : !thirdstatus.attendance
+      })}
+      />
+      </InnerStatus>
+      <InnerStatus>
+      <FontAwesomeIcon color="#FF9E1B" size="3x" icon={ thirdstatus.lecture ? faToggleOn :faToggleOff} 
+      onClick={() => setthirdstatus({
+        ...thirdstatus,
+        lecture : !thirdstatus.lecture
+      })}
+      />
+      </InnerStatus>
+    </Container>
+    
+
+
+
+  
                   </LeftStatusContainer>
                   <RightStatusContainer>
                     <RightTableHeaderContainer>
@@ -248,6 +394,7 @@ function Team({match}) {
           </CenterContainer>  
         </InnerContainer>
       </Sidebar>
+      <button onClick={()=>{console.log(firststatus)}}>상태확인</button>
     </div>
   );
 }

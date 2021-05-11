@@ -1,6 +1,6 @@
-import React, { useState,useEffect } from "react";
-import { Link,useHistory } from 'react-router-dom';
-import styled, { css } from 'styled-components';
+import React, { useState } from "react";
+import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
 import logo from '../logo.png';
 import api from '../api';
 
