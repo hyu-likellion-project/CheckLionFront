@@ -175,7 +175,7 @@ function Team({match}) {
   const [teamname, setteamname] = useState("");
   const [weekdata, setweekdata] = useState([]);
   const [studentnames, setstudentnames ] = useState([]);
-  const [statusdata, setstatusdata] = useState([]);
+  const [studentids, setstudentids ] = useState([]);
   const [firststatus, setfirststatus] = useState([]);
   const [secondstatus, setsecondstatus] = useState([]);
   const [thirdstatus, setthirdstatus] = useState([]);
@@ -216,14 +216,14 @@ function Team({match}) {
   }
 
   const getStudentStatus = async () => {
-    const result = await api.getStudents(match.params.id)
-    const studentids = result.map((student)=>student.id)
-    let statuss = []
+    const result = await api.getStudents(match.params.id);
+    const studentids = result.map((student)=>student.id);
+    setstudentids(studentids);
+    let statuss = [];
     for( let index in studentids){
-      const statusresult = await api.getStatus(studentids[index],week)
-      statuss.push(statusresult)
+      const statusresult = await api.getStatus(studentids[index],week);
+      statuss.push(statusresult);
     }
-    setstatusdata(statuss)
     setfirststatus(statuss[0])
     setsecondstatus(statuss[1])
     setthirdstatus(statuss[2])
@@ -238,10 +238,50 @@ function Team({match}) {
    }
 
    const nextWeek = async () => {
-    if (week < 8) {
+    if (week < 5) {
      setweek(week+1)
     }
    }
+
+   const updateStatuss = async () => {
+     const firstdata = {
+       assignment: firststatus.assignment,
+       attendance: firststatus.attendance,
+       lecture: firststatus.lecture,
+       student: studentids[0],
+       week: week
+     };
+     api.updateStatus(firststatus.id,firstdata);
+
+     const seconddata = {
+      assignment: secondstatus.assignment,
+      attendance: secondstatus.attendance,
+      lecture: secondstatus.lecture,
+      student: studentids[1],
+      week: week
+    };
+    api.updateStatus(secondstatus.id,seconddata);
+
+    const thirddata = {
+      assignment: thirdstatus.assignment,
+      attendance: thirdstatus.attendance,
+      lecture: thirdstatus.lecture,
+      student: studentids[2],
+      week: week
+    };
+    api.updateStatus(thirdstatus.id,thirddata);
+
+    const teampointdata = {
+      assignmentPass: (firststatus.assignment && secondstatus.assignment && thirdstatus.assignment) ? 10 : 0,
+      attendancePass: (firststatus.attendance && secondstatus.attendance && thirdstatus.attendance) ? 10 : 0,
+      lecturePass: (firststatus.lecture && secondstatus.lecture && thirdstatus.lecture) ? 10 : 0,
+      additionalPoint: teampoint.additionalPoint,
+      team: match.params.id,
+      week: week
+    };
+    api.updateTeamPoint(teampoint.id,teampointdata);
+   }
+
 
 
 
@@ -388,7 +428,7 @@ function Team({match}) {
                     <AdditionPointContainer>
                     <Button 
                     onClick={()=> {
-                      teampoint.additionalPoint == 3 ?
+                      teampoint.additionalPoint === 30 ?
                       setteampoint({
                         ...teampoint,
                         additionalPoint: 0
@@ -396,7 +436,7 @@ function Team({match}) {
                       :
                       setteampoint({
                         ...teampoint,
-                        additionalPoint: teampoint.additionalPoint+1
+                        additionalPoint: teampoint.additionalPoint+10
                       })
                     }}
                     >{teampoint.additionalPoint}</Button>
@@ -405,14 +445,13 @@ function Team({match}) {
                 </StatusContainer>
               </StatusWrapper>
               <SubmitContainer>
-                <SubmitButton>
+                <SubmitButton onClick={updateStatuss}>
                     저장하기
                 </SubmitButton>
               </SubmitContainer>    
           </CenterContainer>  
         </InnerContainer>
       </Sidebar>
-      <button onClick={()=>{console.log(teampoint)}}>상태확인</button>
     </div>
   );
 }

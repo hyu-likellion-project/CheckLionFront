@@ -34,7 +34,26 @@ export default {
         return data;
     },
 
-
+    updateStatus(id, data) {
+        axios.put('/check/status/'+id+"/", data)
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    },
+    
+    updateTeamPoint(id, data) {
+        axios.put('/check/teampoint/'+id+"/", data)
+        .then(function (response) {
+            console.log(response);
+            alert("저장했습니다.")
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    },
 
     login(data) {
         return axios.post('/rest-auth/login/', data)
@@ -43,7 +62,6 @@ export default {
     });
     },
 
-    
 
     createPost(data) {
         return axios.post('/posts/', data)
